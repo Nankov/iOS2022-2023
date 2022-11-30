@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject	var mod = model
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        NavigationView{
+            List {
+                profile()
+                ForEach(mod.sections){ section in
+                    Section{
+                        ForEach(section.items){item in
+                            NavigationLink(destination: EmptyView()) {
+                                HStack {
+                                    Image(systemName: item.img)
+                                    Text(item.text)
+                                }
+                            }                    }
+                    }
+                }
+            }
+        }.navigationTitle("Nastroiki")
     }
 }
 
